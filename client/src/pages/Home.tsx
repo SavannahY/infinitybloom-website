@@ -1,25 +1,32 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+/* =============================================================
+   HOME PAGE — Infinity Bloom Co.
+   Design: Deep Ocean Tech — dark navy, teal/cyan accents, Syne + DM Sans
+   Sections: Navbar, Hero, Services, Solutions, About, WhyUs, Contact, Footer
+   ============================================================= */
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ServicesSection from "@/components/ServicesSection";
+import TickerSection from "@/components/TickerSection";
+import SolutionsSection from "@/components/SolutionsSection";
+import AboutSection from "@/components/AboutSection";
+import ProcessSection from "@/components/ProcessSection";
+import WhyUsSection from "@/components/WhyUsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
- */
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
+    <div className="min-h-screen bg-[#050E1F]">
+      <Navbar />
+      <HeroSection />
+      <TickerSection />
+      <ServicesSection />
+      <SolutionsSection />
+      <ProcessSection />
+      <AboutSection />
+      <WhyUsSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }
