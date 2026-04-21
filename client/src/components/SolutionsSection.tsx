@@ -3,42 +3,29 @@
    Clean two-column layout with image + feature list.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Globe, Database, Monitor, Leaf, Check } from "lucide-react";
 
 const SOLUTIONS_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/solutions_premium_v2-VsNrih2NRnUatpwhcXtwUF.webp";
 
-const capabilities = [
-  {
-    icon: Globe,
-    title: "Global Coverage",
-    description: "Consulting engagements across Asia-Pacific, the Middle East, and emerging markets with local regulatory expertise.",
-  },
-  {
-    icon: Database,
-    title: "24/7 Data Availability",
-    description: "Real-time monitoring and analytics platforms that keep your infrastructure performing at its best, around the clock.",
-  },
-  {
-    icon: Monitor,
-    title: "Enterprise Software",
-    description: "Proprietary DCIM and energy campus management platforms purpose-built for global data center operations.",
-  },
-  {
-    icon: Leaf,
-    title: "BTM Energy Solutions",
-    description: "Behind-the-meter solar PV and battery storage systems that reduce grid dependency and lower operational costs.",
-  },
-];
-
-const features = [
-  "Asia-Pacific, Middle East, and global market access",
-  "Cross-border project management and advisory",
-  "Local regulatory and grid compliance expertise",
-  "Multilingual delivery (English, Mandarin, Cantonese)",
-];
+const capIcons = [Globe, Database, Monitor, Leaf];
 
 export default function SolutionsSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
+
+  const capabilities = [1, 2, 3, 4].map((i) => ({
+    icon: capIcons[i - 1],
+    title: t(`solutions.cap.${i}.title`),
+    description: t(`solutions.cap.${i}.desc`),
+  }));
+
+  const features = [
+    t("solutions.reach.f1"),
+    t("solutions.reach.f2"),
+    t("solutions.reach.f3"),
+    t("solutions.reach.f4"),
+  ];
 
   return (
     <section id="solutions" ref={sectionRef} className="py-24 md:py-40">
@@ -48,13 +35,12 @@ export default function SolutionsSection() {
 
         {/* Section header */}
         <div className="reveal mb-16 md:mb-20">
-          <span className="text-label mb-4 block">Our Solutions</span>
+          <span className="text-label mb-4 block">{t("solutions.overline")}</span>
           <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-5">
-            Integrated <span className="italic text-[#00D4AA]">platforms</span>
+            {t("solutions.heading.1")}<span className="italic text-[#00D4AA]">{t("solutions.heading.accent")}</span>
           </h2>
           <p className="text-body max-w-2xl">
-            Global consulting expertise paired with enterprise-grade technology
-            platforms for energy and data infrastructure.
+            {t("solutions.sub")}
           </p>
         </div>
 
@@ -64,7 +50,7 @@ export default function SolutionsSection() {
           <div className="reveal rounded-xl overflow-hidden border border-white/[0.06]">
             <img
               src={SOLUTIONS_IMG}
-              alt="Energy management dashboard with solar panel view"
+              alt="Energy management dashboard"
               className="w-full h-[300px] md:h-[400px] object-cover"
             />
           </div>
@@ -72,12 +58,10 @@ export default function SolutionsSection() {
           {/* Feature list */}
           <div className="reveal flex flex-col justify-center">
             <h3 className="heading-section text-2xl md:text-3xl text-white mb-4">
-              Worldwide Consulting Reach
+              {t("solutions.reach.title")}
             </h3>
             <p className="text-body mb-8">
-              Infinity Bloom operates across Asia-Pacific, the Middle East, and emerging
-              markets. Our consultants bring local regulatory expertise combined with
-              international best practices.
+              {t("solutions.reach.desc")}
             </p>
             <ul className="space-y-3 mb-8">
               {features.map((f) => (
@@ -91,7 +75,7 @@ export default function SolutionsSection() {
               onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               className="btn-primary self-start"
             >
-              Discuss Your Project
+              {t("solutions.reach.cta")}
             </button>
           </div>
         </div>

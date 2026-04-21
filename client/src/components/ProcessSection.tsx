@@ -4,36 +4,17 @@
    Instrument Serif numbers as design element.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
-
-const steps = [
-  {
-    num: "01",
-    title: "Discovery",
-    description:
-      "We assess your energy needs, site conditions, regulatory landscape, and business objectives — producing a clear feasibility report.",
-  },
-  {
-    num: "02",
-    title: "Strategy",
-    description:
-      "Our consultants develop tailored technical designs and strategic roadmaps — from power system architecture to software integration.",
-  },
-  {
-    num: "03",
-    title: "Implementation",
-    description:
-      "We manage procurement, construction, and deployment through our global partner network — ensuring quality delivery on time.",
-  },
-  {
-    num: "04",
-    title: "Optimisation",
-    description:
-      "Post-deployment, our platforms provide real-time monitoring, analytics, and ongoing advisory to keep your infrastructure at peak performance.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProcessSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
+
+  const steps = [1, 2, 3, 4].map((i) => ({
+    num: `0${i}`,
+    title: t(`process.${i}.title`),
+    description: t(`process.${i}.desc`),
+  }));
 
   return (
     <section id="process" ref={sectionRef} className="py-24 md:py-40">
@@ -43,13 +24,12 @@ export default function ProcessSection() {
 
         {/* Section header */}
         <div className="reveal mb-16 md:mb-20">
-          <span className="text-label mb-4 block">How We Work</span>
+          <span className="text-label mb-4 block">{t("process.overline")}</span>
           <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-5">
-            Our <span className="italic text-[#00D4AA]">process</span>
+            {t("process.heading.1")}<span className="italic text-[#00D4AA]">{t("process.heading.accent")}</span>
           </h2>
           <p className="text-body max-w-2xl">
-            A structured, transparent consulting approach from initial discovery
-            through long-term support.
+            {t("process.sub")}
           </p>
         </div>
 

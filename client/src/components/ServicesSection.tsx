@@ -4,53 +4,22 @@
    Minimal icons, generous spacing, no decorative noise.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Zap, Server, Cpu, Code2, Sun } from "lucide-react";
 
-const services = [
-  {
-    icon: Zap,
-    title: "Renewable Energy Consulting",
-    subtitle: "Power Strategy & Procurement",
-    description:
-      "We advise data center operators and enterprises on clean energy strategy — from PPA structuring and renewable electricity procurement to grid integration planning.",
-    tags: ["PPA Advisory", "Energy Strategy", "Grid Integration"],
-  },
-  {
-    icon: Server,
-    title: "Data Center Development",
-    subtitle: "Infrastructure Design & Delivery",
-    description:
-      "End-to-end consulting for hyperscale and edge data center projects — covering site selection, power infrastructure design, construction management, and commissioning.",
-    tags: ["Site Selection", "Power Design", "Commissioning"],
-  },
-  {
-    icon: Cpu,
-    title: "Hardware Advisory",
-    subtitle: "Global Technology Consulting",
-    description:
-      "Our technology consultants advise on server, networking, and cooling hardware — from vendor evaluation and procurement strategy to deployment planning.",
-    tags: ["Vendor Evaluation", "Procurement", "TCO Optimization"],
-  },
-  {
-    icon: Code2,
-    title: "Enterprise Software",
-    subtitle: "Energy & Data Center Platforms",
-    description:
-      "We develop and license B2B software for data center energy management and campus design — real-time monitoring, predictive analytics, and automated optimization.",
-    tags: ["DCIM Platform", "Energy Analytics", "Campus Design"],
-  },
-  {
-    icon: Sun,
-    title: "BTM Solar & Battery",
-    subtitle: "Behind-the-Meter Systems",
-    description:
-      "We design, install, and manage behind-the-meter solar PV and battery storage systems for commercial and industrial clients globally.",
-    tags: ["Solar PV", "BESS", "Demand Management"],
-  },
-];
+const serviceIcons = [Zap, Server, Cpu, Code2, Sun];
 
 export default function ServicesSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
+
+  const services = [1, 2, 3, 4, 5].map((i) => ({
+    icon: serviceIcons[i - 1],
+    title: t(`services.${i}.title`),
+    subtitle: t(`services.${i}.subtitle`),
+    description: t(`services.${i}.desc`),
+    tags: [t(`services.${i}.tag1`), t(`services.${i}.tag2`), t(`services.${i}.tag3`)],
+  }));
 
   return (
     <section id="services" ref={sectionRef} className="py-24 md:py-40">
@@ -60,13 +29,12 @@ export default function ServicesSection() {
 
         {/* Section header */}
         <div className="reveal mb-16 md:mb-20">
-          <span className="text-label mb-4 block">What We Do</span>
+          <span className="text-label mb-4 block">{t("services.overline")}</span>
           <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-5">
-            Our <span className="italic text-[#00D4AA]">services</span>
+            {t("services.heading.1")}<span className="italic text-[#00D4AA]">{t("services.heading.accent")}</span>
           </h2>
           <p className="text-body max-w-2xl">
-            Technology consulting and integrated solutions across the full energy
-            and data infrastructure value chain — serving clients globally.
+            {t("services.sub")}
           </p>
         </div>
 

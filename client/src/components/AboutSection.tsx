@@ -4,18 +4,18 @@
    No decorative noise. Generous whitespace.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/about_premium_v2-e5GSWK42ESbFEXUxg8mNnr.webp";
 
-const facts = [
-  { label: "Headquarters", value: "Hong Kong" },
-  { label: "Focus", value: "B2B Consulting" },
-  { label: "Coverage", value: "Global" },
-  { label: "Languages", value: "EN / 中文 / 廣東話" },
-];
-
 export default function AboutSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
+
+  const facts = [1, 2, 3, 4].map((i) => ({
+    label: t(`about.fact.${i}.label`),
+    value: t(`about.fact.${i}.value`),
+  }));
 
   return (
     <section id="about" ref={sectionRef} className="py-24 md:py-40">
@@ -25,9 +25,9 @@ export default function AboutSection() {
 
         {/* Section header */}
         <div className="reveal mb-16 md:mb-20">
-          <span className="text-label mb-4 block">About Us</span>
+          <span className="text-label mb-4 block">{t("about.overline")}</span>
           <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white">
-            Who we <span className="italic text-[#00D4AA]">are</span>
+            {t("about.heading.1")}<span className="italic text-[#00D4AA]">{t("about.heading.accent")}</span>
           </h2>
         </div>
 
@@ -45,25 +45,12 @@ export default function AboutSection() {
           {/* Text */}
           <div className="reveal flex flex-col justify-center">
             <h3 className="heading-section text-xl md:text-2xl text-white mb-6">
-              A technology consulting firm for the energy transition
+              {t("about.subtitle")}
             </h3>
             <div className="space-y-4">
-              <p className="text-body">
-                Infinity Bloom Co. Limited is a technology consulting firm founded to
-                address the growing intersection of digital infrastructure and
-                sustainable energy. As data centers become the backbone of the global
-                economy, their energy demands have never been greater.
-              </p>
-              <p className="text-body">
-                We work with data center operators, property developers, and enterprises
-                worldwide to design and deliver solutions that are both technically
-                rigorous and environmentally responsible.
-              </p>
-              <p className="text-body">
-                From renewable energy advisory and data center development to hardware
-                consulting and proprietary software platforms — Infinity Bloom is your
-                partner for the full infrastructure lifecycle.
-              </p>
+              <p className="text-body">{t("about.p1")}</p>
+              <p className="text-body">{t("about.p2")}</p>
+              <p className="text-body">{t("about.p3")}</p>
             </div>
           </div>
         </div>

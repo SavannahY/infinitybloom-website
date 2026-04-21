@@ -4,20 +4,13 @@
    ============================================================= */
 import { useState } from "react";
 import { useRevealAll } from "@/hooks/useReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 
-const serviceAreas = [
-  "Renewable Energy Consulting",
-  "Data Center Development",
-  "Hardware Advisory",
-  "Enterprise Software",
-  "BTM Solar & Battery",
-  "General Enquiry",
-];
-
 export default function ContactSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -26,9 +19,12 @@ export default function ContactSection() {
     message: "",
   });
 
+  const serviceAreas = [1, 2, 3, 4, 5, 6].map((i) => t(`contact.form.service.${i}`));
+  const regions = [1, 2, 3, 4, 5].map((i) => t(`contact.info.region.${i}`));
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you for your enquiry. We will be in touch shortly.");
+    toast.success(t("contact.form.success"));
     setForm({ name: "", email: "", company: "", service: "", message: "" });
   };
 
@@ -46,12 +42,12 @@ export default function ContactSection() {
 
         {/* Section header */}
         <div className="reveal mb-16 md:mb-20">
-          <span className="text-label mb-4 block">Contact</span>
+          <span className="text-label mb-4 block">{t("contact.overline")}</span>
           <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-5">
-            Get in <span className="italic text-[#00D4AA]">touch</span>
+            {t("contact.heading.1")}<span className="italic text-[#00D4AA]">{t("contact.heading.accent")}</span>
           </h2>
           <p className="text-body max-w-2xl">
-            Tell us about your project. We typically respond within one business day.
+            {t("contact.sub")}
           </p>
         </div>
 
@@ -63,26 +59,26 @@ export default function ContactSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="text-[12px] font-medium text-white/40 uppercase tracking-wider mb-2 block">
-                    Name
+                    {t("contact.form.name")}
                   </label>
                   <input
                     type="text"
                     value={form.name}
                     onChange={(e) => update("name", e.target.value)}
-                    placeholder="Your name"
+                    placeholder={t("contact.form.name.ph")}
                     required
                     className={inputClass}
                   />
                 </div>
                 <div>
                   <label className="text-[12px] font-medium text-white/40 uppercase tracking-wider mb-2 block">
-                    Email
+                    {t("contact.form.email")}
                   </label>
                   <input
                     type="email"
                     value={form.email}
                     onChange={(e) => update("email", e.target.value)}
-                    placeholder="you@company.com"
+                    placeholder={t("contact.form.email.ph")}
                     required
                     className={inputClass}
                   />
@@ -92,26 +88,26 @@ export default function ContactSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="text-[12px] font-medium text-white/40 uppercase tracking-wider mb-2 block">
-                    Company
+                    {t("contact.form.company")}
                   </label>
                   <input
                     type="text"
                     value={form.company}
                     onChange={(e) => update("company", e.target.value)}
-                    placeholder="Company name"
+                    placeholder={t("contact.form.company.ph")}
                     className={inputClass}
                   />
                 </div>
                 <div>
                   <label className="text-[12px] font-medium text-white/40 uppercase tracking-wider mb-2 block">
-                    Service Area
+                    {t("contact.form.service")}
                   </label>
                   <select
                     value={form.service}
                     onChange={(e) => update("service", e.target.value)}
                     className={`${inputClass} appearance-none`}
                   >
-                    <option value="" className="bg-[#09090B]">Select a service</option>
+                    <option value="" className="bg-[#09090B]">{t("contact.form.service.ph")}</option>
                     {serviceAreas.map((s) => (
                       <option key={s} value={s} className="bg-[#09090B]">{s}</option>
                     ))}
@@ -121,12 +117,12 @@ export default function ContactSection() {
 
               <div>
                 <label className="text-[12px] font-medium text-white/40 uppercase tracking-wider mb-2 block">
-                  Message
+                  {t("contact.form.message")}
                 </label>
                 <textarea
                   value={form.message}
                   onChange={(e) => update("message", e.target.value)}
-                  placeholder="Tell us about your project..."
+                  placeholder={t("contact.form.message.ph")}
                   rows={5}
                   required
                   className={`${inputClass} resize-none`}
@@ -134,7 +130,7 @@ export default function ContactSection() {
               </div>
 
               <button type="submit" className="btn-primary">
-                Send Enquiry
+                {t("contact.form.submit")}
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
@@ -145,13 +141,13 @@ export default function ContactSection() {
             <div className="card-surface p-7 md:p-8 space-y-8">
               <div>
                 <h4 className="text-[13px] font-medium text-white/30 uppercase tracking-wider mb-4">
-                  Reach Us
+                  {t("contact.info.reach")}
                 </h4>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <Mail className="w-4 h-4 text-[#00D4AA] mt-1 flex-shrink-0" strokeWidth={1.5} />
                     <div>
-                      <p className="text-[14px] text-white/60">Email</p>
+                      <p className="text-[14px] text-white/60">{t("contact.info.email")}</p>
                       <a href="mailto:info@infinitybloomco.com" className="text-[14px] text-white hover:text-[#00D4AA] transition-colors">
                         info@infinitybloomco.com
                       </a>
@@ -160,8 +156,8 @@ export default function ContactSection() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-4 h-4 text-[#00D4AA] mt-1 flex-shrink-0" strokeWidth={1.5} />
                     <div>
-                      <p className="text-[14px] text-white/60">Office</p>
-                      <p className="text-[14px] text-white">Hong Kong</p>
+                      <p className="text-[14px] text-white/60">{t("contact.info.office")}</p>
+                      <p className="text-[14px] text-white">{t("contact.info.office.value")}</p>
                     </div>
                   </div>
                 </div>
@@ -171,10 +167,10 @@ export default function ContactSection() {
 
               <div>
                 <h4 className="text-[13px] font-medium text-white/30 uppercase tracking-wider mb-4">
-                  Service Regions
+                  {t("contact.info.regions")}
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {["Asia-Pacific", "Middle East", "Southeast Asia", "Greater China", "Global"].map((r) => (
+                  {regions.map((r) => (
                     <span
                       key={r}
                       className="text-[11px] font-medium text-white/35 bg-white/[0.04] px-2.5 py-1 rounded-md"
@@ -189,11 +185,10 @@ export default function ContactSection() {
 
               <div>
                 <h4 className="text-[13px] font-medium text-white/30 uppercase tracking-wider mb-3">
-                  Response Time
+                  {t("contact.info.response")}
                 </h4>
                 <p className="text-[14px] text-white/50">
-                  We typically respond within one business day. For urgent enquiries,
-                  please indicate in your message.
+                  {t("contact.info.response.desc")}
                 </p>
               </div>
             </div>

@@ -3,43 +3,20 @@
    Clean differentiator cards. No decorative noise.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Award, TrendingUp, Users, Globe, Shield, Lightbulb } from "lucide-react";
 
-const differentiators = [
-  {
-    icon: Award,
-    title: "Technical Excellence",
-    description: "Deep expertise in power engineering, data center design, and enterprise software — built from decades of combined industry experience.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Sustainable Innovation",
-    description: "We believe the most resilient infrastructure is built on clean energy. Every engagement we deliver advances the energy transition.",
-  },
-  {
-    icon: Users,
-    title: "Consulting Partnership",
-    description: "We work as an extension of your team — providing strategic advisory, technical delivery, and long-term operational support.",
-  },
-  {
-    icon: Globe,
-    title: "Global Perspective",
-    description: "Headquartered in Hong Kong with a global outlook. We bring international best practices to every market we serve.",
-  },
-  {
-    icon: Shield,
-    title: "Integrated Delivery",
-    description: "From energy strategy through software deployment — a single partner for the full infrastructure lifecycle.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Proprietary Technology",
-    description: "Our B2B software platforms are purpose-built for energy and data center operations — not adapted from generic tools.",
-  },
-];
+const diffIcons = [Award, TrendingUp, Users, Globe, Shield, Lightbulb];
 
 export default function WhyUsSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
+
+  const differentiators = [1, 2, 3, 4, 5, 6].map((i) => ({
+    icon: diffIcons[i - 1],
+    title: t(`whyus.${i}.title`),
+    description: t(`whyus.${i}.desc`),
+  }));
 
   return (
     <section ref={sectionRef} className="py-24 md:py-40">
@@ -49,14 +26,12 @@ export default function WhyUsSection() {
 
         {/* Section header */}
         <div className="reveal mb-16 md:mb-20">
-          <span className="text-label mb-4 block">Why Infinity Bloom</span>
+          <span className="text-label mb-4 block">{t("whyus.overline")}</span>
           <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-5">
-            What sets us <span className="italic text-[#00D4AA]">apart</span>
+            {t("whyus.heading.1")}<span className="italic text-[#00D4AA]">{t("whyus.heading.accent")}</span>
           </h2>
           <p className="text-body max-w-2xl">
-            We combine deep technical expertise with a genuine commitment to
-            sustainable infrastructure — delivering consulting that creates
-            lasting value.
+            {t("whyus.sub")}
           </p>
         </div>
 
@@ -84,17 +59,17 @@ export default function WhyUsSection() {
         <div className="reveal card-surface p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <h3 className="heading-section text-xl md:text-2xl text-white mb-2">
-              Ready to start a conversation?
+              {t("whyus.cta.title")}
             </h3>
             <p className="text-[15px] text-white/40">
-              Let us know about your project and we will get back to you within 24 hours.
+              {t("whyus.cta.desc")}
             </p>
           </div>
           <button
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-primary flex-shrink-0"
           >
-            Get in Touch
+            {t("whyus.cta.btn")}
           </button>
         </div>
       </div>

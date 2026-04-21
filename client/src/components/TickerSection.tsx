@@ -2,21 +2,12 @@
    TICKER — Quiet Authority Design
    Subtle horizontal scrolling text. Minimal, no decorative noise.
    ============================================================= */
-
-const items = [
-  "Renewable Energy",
-  "Data Centers",
-  "Hardware Advisory",
-  "Enterprise Software",
-  "BTM Solar",
-  "Battery Storage",
-  "DCIM Platforms",
-  "Energy Campus",
-  "Global Consulting",
-  "Grid Integration",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function TickerSection() {
+  const { t } = useLanguage();
+
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => t(`ticker.${i}`));
   const doubled = [...items, ...items];
 
   return (

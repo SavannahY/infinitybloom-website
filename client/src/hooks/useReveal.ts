@@ -6,6 +6,9 @@ import { useEffect, useRef } from "react";
 export function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -13,9 +16,9 @@ export function useReveal() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
     );
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
   return ref;
@@ -23,13 +26,18 @@ export function useReveal() {
 
 /**
  * Attaches IntersectionObserver to ALL .reveal children inside the container ref.
- * Each child gets its own observer so staggered delays work properly.
+ * Re-runs whenever the component re-renders (e.g. language change) to catch
+ * newly rendered elements. Already-visible elements are skipped.
  */
 export function useRevealAll() {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (!ref.current) return;
-    const elements = ref.current.querySelectorAll(".reveal");
+    const container = ref.current;
+    if (!container) return;
+
+    const elements = container.querySelectorAll(".reveal");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -39,10 +47,31 @@ export function useRevealAll() {
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.02, rootMargin: "50px 0px -10px 0px" }
     );
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+
+    elements.forEach((el) => {
+      // Skip elements that are already visible
+      if (!el.classList.contains("visible")) {
+        observer.observe(el);
+      }
+    });
+
+    // Fallback: after 2s, make any still-hidden elements visible
+    // This prevents content from being permanently hidden if observer fails
+    const fallback = setTimeout(() => {
+      elements.forEach((el) => {
+        if (!el.classList.contains("visible")) {
+          el.classList.add("visible");
+        }
+      });
+    }, 2500);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
+  });
+
   return ref;
 }

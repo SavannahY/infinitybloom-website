@@ -4,19 +4,21 @@
    Subtle stats bar below. Premium hero image as accent.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight } from "lucide-react";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/hero_premium_v2-NnVBZfixHdp3ybdhZfMZ2A.webp";
 
-const metrics = [
-  { value: "Global", label: "Business Coverage" },
-  { value: "24/7", label: "Data Availability" },
-  { value: "APAC+", label: "Regional Reach" },
-  { value: "End-to-End", label: "Consulting Delivery" },
-];
-
 export default function HeroSection() {
   const sectionRef = useRevealAll();
+  const { t } = useLanguage();
+
+  const metrics = [
+    { value: t("hero.metric.1.value"), label: t("hero.metric.1.label") },
+    { value: t("hero.metric.2.value"), label: t("hero.metric.2.label") },
+    { value: t("hero.metric.3.value"), label: t("hero.metric.3.label") },
+    { value: t("hero.metric.4.value"), label: t("hero.metric.4.label") },
+  ];
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center pt-16">
@@ -31,19 +33,18 @@ export default function HeroSection() {
         <div className="max-w-4xl pt-16 md:pt-24 lg:pt-32">
           {/* Overline */}
           <div className="reveal mb-6">
-            <span className="text-label">Technology Consulting</span>
+            <span className="text-label">{t("hero.overline")}</span>
           </div>
 
           {/* Display heading */}
           <h1 className="reveal heading-display text-[clamp(2.5rem,7vw,5.5rem)] text-white mb-8">
-            Infrastructure for the{" "}
-            <span className="italic text-[#00D4AA]">energy transition</span>
+            {t("hero.heading.1")}
+            <span className="italic text-[#00D4AA]">{t("hero.heading.accent")}</span>
           </h1>
 
           {/* Subheading */}
           <p className="reveal text-body max-w-xl mb-10 text-[1.125rem] leading-relaxed">
-            We advise on renewable energy, data center development, and enterprise
-            software — delivering integrated consulting across Asia-Pacific and beyond.
+            {t("hero.sub")}
           </p>
 
           {/* CTAs */}
@@ -52,14 +53,14 @@ export default function HeroSection() {
               onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
               className="btn-primary"
             >
-              Explore Services
+              {t("hero.cta.primary")}
               <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               className="btn-ghost"
             >
-              Contact Us
+              {t("hero.cta.secondary")}
             </button>
           </div>
         </div>
