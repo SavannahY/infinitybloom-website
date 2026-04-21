@@ -1,25 +1,28 @@
 /* =============================================================
-   LOGO — Infinity Bloom Co.
-   Generated logo: infinity symbol with bloom/leaf motif
-   Teal-to-cyan gradient on transparent background
+   LOGO — Quiet Authority Design
+   Clean wordmark with generated logo icon
    ============================================================= */
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/logo_infinity_bloom-CEV2W3NoCKair88HDb4Wmg.png";
 
 interface LogoProps {
-  size?: number;
   className?: string;
 }
 
-export default function Logo({ size = 36, className = "" }: LogoProps) {
+export default function Logo({ className = "" }: LogoProps) {
   return (
-    <img
-      src={LOGO_URL}
-      alt="Infinity Bloom logo"
-      width={size}
-      height={size}
-      className={`object-contain ${className}`}
-      style={{ width: size, height: size }}
-    />
+    <div className={`flex items-center gap-2.5 ${className}`}>
+      <img
+        src={LOGO_URL}
+        alt=""
+        className="w-7 h-7 object-contain"
+      />
+      <span
+        className="text-[15px] font-semibold tracking-[-0.02em] text-white/90"
+        style={{ fontFamily: "Inter, system-ui, sans-serif" }}
+      >
+        Infinity Bloom
+      </span>
+    </div>
   );
 }

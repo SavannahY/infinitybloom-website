@@ -1,28 +1,26 @@
 /* =============================================================
-   TICKER SECTION — Deep Ocean Tech Design
-   Scrolling marquee — global business, tech consulting emphasis
+   TICKER — Quiet Authority Design
+   Subtle horizontal scrolling text. Minimal, no decorative noise.
    ============================================================= */
 
 const items = [
-  "Technology Consulting",
   "Renewable Energy",
-  "Data Center Development",
+  "Data Centers",
   "Hardware Advisory",
-  "BTM Solar & Battery",
   "Enterprise Software",
-  "Energy Campus Design",
-  "BESS Integration",
+  "BTM Solar",
+  "Battery Storage",
   "DCIM Platforms",
-  "Global Coverage",
-  "24/7 Data Availability",
-  "B2B Solutions",
+  "Energy Campus",
+  "Global Consulting",
+  "Grid Integration",
 ];
 
 export default function TickerSection() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="bg-[#0A1628] border-y border-white/5 py-4 overflow-hidden">
+    <div className="border-y border-white/[0.06] overflow-hidden py-4">
       <style>{`
         @keyframes ticker {
           0% { transform: translateX(0); }
@@ -39,14 +37,11 @@ export default function TickerSection() {
       `}</style>
       <div className="ticker-track">
         {doubled.map((item, i) => (
-          <div key={i} className="flex items-center gap-4 px-6 flex-shrink-0">
-            <span
-              className="text-sm font-medium text-white/40 whitespace-nowrap"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
+          <div key={i} className="flex items-center gap-5 px-5 flex-shrink-0">
+            <span className="text-[13px] font-medium text-white/20 tracking-wider uppercase whitespace-nowrap">
               {item}
             </span>
-            <div className="w-1 h-1 rounded-full bg-[#0EA5E9]/60" />
+            <span className="text-white/10">·</span>
           </div>
         ))}
       </div>

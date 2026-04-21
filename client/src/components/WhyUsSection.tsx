@@ -1,59 +1,40 @@
 /* =============================================================
-   WHY US SECTION — Deep Ocean Tech Design
-   Differentiators — tech consulting, global business focus
+   WHY US — Quiet Authority Design
+   Clean differentiator cards. No decorative noise.
    ============================================================= */
 import { useRevealAll } from "@/hooks/useReveal";
-import {
-  Layers,
-  Lightbulb,
-  Handshake,
-  Globe,
-  ShieldCheck,
-  Workflow,
-} from "lucide-react";
+import { Award, TrendingUp, Users, Globe, Shield, Lightbulb } from "lucide-react";
 
 const differentiators = [
   {
-    icon: Layers,
-    title: "Full-Stack Consulting",
-    description:
-      "One of the few firms globally that can advise across the entire value chain — from renewable energy strategy and data center design to hardware procurement and enterprise software. One partner, end-to-end.",
-    color: "#0EA5E9",
+    icon: Award,
+    title: "Technical Excellence",
+    description: "Deep expertise in power engineering, data center design, and enterprise software — built from decades of combined industry experience.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Sustainable Innovation",
+    description: "We believe the most resilient infrastructure is built on clean energy. Every engagement we deliver advances the energy transition.",
+  },
+  {
+    icon: Users,
+    title: "Consulting Partnership",
+    description: "We work as an extension of your team — providing strategic advisory, technical delivery, and long-term operational support.",
+  },
+  {
+    icon: Globe,
+    title: "Global Perspective",
+    description: "Headquartered in Hong Kong with a global outlook. We bring international best practices to every market we serve.",
+  },
+  {
+    icon: Shield,
+    title: "Integrated Delivery",
+    description: "From energy strategy through software deployment — a single partner for the full infrastructure lifecycle.",
   },
   {
     icon: Lightbulb,
     title: "Proprietary Technology",
-    description:
-      "Our in-house software platforms for energy campus management and DCIM are purpose-built for global markets, incorporating local grid characteristics and regulatory requirements.",
-    color: "#06B6D4",
-  },
-  {
-    icon: Handshake,
-    title: "Trusted B2B Partner",
-    description:
-      "We operate exclusively in the B2B space, serving data center operators, real estate developers, and large enterprises. Our relationships are built on measurable outcomes and long-term value.",
-    color: "#10B981",
-  },
-  {
-    icon: Globe,
-    title: "Global Reach",
-    description:
-      "Headquartered in Hong Kong with consulting engagements across Asia-Pacific, the Middle East, and emerging markets. We bring international expertise to every project.",
-    color: "#F59E0B",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Regulatory Expertise",
-    description:
-      "Deep knowledge of electricity markets, grid connection requirements, and cross-border energy regulations across multiple jurisdictions and geographies.",
-    color: "#0EA5E9",
-  },
-  {
-    icon: Workflow,
-    title: "Integrated Delivery",
-    description:
-      "From initial feasibility and financial modelling through design, delivery, and ongoing operations — our integrated consulting approach reduces handover risk and ensures accountability.",
-    color: "#06B6D4",
+    description: "Our B2B software platforms are purpose-built for energy and data center operations — not adapted from generic tools.",
   },
 ];
 
@@ -61,99 +42,60 @@ export default function WhyUsSection() {
   const sectionRef = useRevealAll();
 
   return (
-    <section id="why-us" className="py-24 bg-[#0A1628] relative overflow-hidden" ref={sectionRef}>
-      {/* Decorative */}
-      <div className="absolute top-0 right-0 w-[600px] h-[400px] opacity-5"
-        style={{ background: 'radial-gradient(ellipse at top right, #0EA5E9 0%, transparent 70%)' }}
-      />
+    <section ref={sectionRef} className="py-24 md:py-40">
+      <div className="container">
+        {/* Divider */}
+        <div className="divider mb-24 md:mb-40" />
 
-      <div className="container relative z-10">
-        {/* Header */}
-        <div className="reveal text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F59E0B]/30 bg-[#F59E0B]/10 mb-4">
-            <span className="text-xs font-medium text-[#F59E0B] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-              Why Infinity Bloom
-            </span>
-          </div>
-          <h2
-            className="text-4xl md:text-5xl font-extrabold text-white mb-4"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
-            Our <span className="gradient-text">Advantage</span>
+        {/* Section header */}
+        <div className="reveal mb-16 md:mb-20">
+          <span className="text-label mb-4 block">Why Infinity Bloom</span>
+          <h2 className="heading-display text-4xl md:text-5xl lg:text-[3.5rem] text-white mb-5">
+            What sets us <span className="italic text-[#00D4AA]">apart</span>
           </h2>
-          <p className="text-lg text-white/55 max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            What sets Infinity Bloom apart as a global technology consulting firm.
+          <p className="text-body max-w-2xl">
+            We combine deep technical expertise with a genuine commitment to
+            sustainable infrastructure — delivering consulting that creates
+            lasting value.
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {differentiators.map((d, i) => {
+        {/* Cards grid */}
+        <div className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16 md:mb-20">
+          {differentiators.map((d) => {
             const Icon = d.icon;
             return (
-              <div
-                key={d.title}
-                className="glow-card rounded-2xl p-6 reveal group"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110"
-                    style={{ background: `${d.color}20`, border: `1px solid ${d.color}40` }}
-                  >
-                    <Icon className="w-6 h-6" style={{ color: d.color }} />
-                  </div>
-                  <div>
-                    <h3
-                      className="text-base font-bold text-white mb-2"
-                      style={{ fontFamily: 'Syne, sans-serif' }}
-                    >
-                      {d.title}
-                    </h3>
-                    <p className="text-sm text-white/55 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                      {d.description}
-                    </p>
-                  </div>
+              <div key={d.title} className="reveal card-surface p-7 md:p-8 group">
+                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center mb-5 group-hover:border-[#00D4AA]/30 transition-colors duration-200">
+                  <Icon className="w-5 h-5 text-[#00D4AA]" strokeWidth={1.5} />
                 </div>
+                <h3 className="text-[15px] font-semibold text-white mb-2 tracking-[-0.01em]">
+                  {d.title}
+                </h3>
+                <p className="text-[14px] leading-relaxed text-white/40">
+                  {d.description}
+                </p>
               </div>
             );
           })}
         </div>
 
-        {/* CTA Banner */}
-        <div className="mt-16 reveal">
-          <div
-            className="rounded-2xl p-8 md:p-12 relative overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, #0A1E3A 0%, #051428 100%)',
-              border: '1px solid rgba(14,165,233,0.2)',
-            }}
-          >
-            {/* Glow */}
-            <div className="absolute inset-0 opacity-10"
-              style={{ background: 'radial-gradient(ellipse at center, #0EA5E9 0%, transparent 70%)' }}
-            />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <h3
-                  className="text-2xl md:text-3xl font-bold text-white mb-2"
-                  style={{ fontFamily: 'Syne, sans-serif' }}
-                >
-                  Ready to Power Your Infrastructure?
-                </h3>
-                <p className="text-white/60" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                  Let's discuss how Infinity Bloom can support your energy and data center goals — anywhere in the world.
-                </p>
-              </div>
-              <button
-                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="btn-teal flex-shrink-0 px-8 py-4 rounded-xl text-base font-bold text-white whitespace-nowrap"
-                style={{ fontFamily: 'Syne, sans-serif' }}
-              >
-                Start a Conversation
-              </button>
-            </div>
+        {/* CTA banner */}
+        <div className="reveal card-surface p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <h3 className="heading-section text-xl md:text-2xl text-white mb-2">
+              Ready to start a conversation?
+            </h3>
+            <p className="text-[15px] text-white/40">
+              Let us know about your project and we will get back to you within 24 hours.
+            </p>
           </div>
+          <button
+            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            className="btn-primary flex-shrink-0"
+          >
+            Get in Touch
+          </button>
         </div>
       </div>
     </section>
