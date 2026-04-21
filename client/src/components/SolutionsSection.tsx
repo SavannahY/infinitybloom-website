@@ -1,9 +1,10 @@
 /* =============================================================
    SOLUTIONS SECTION — Deep Ocean Tech Design
-   Tabbed solutions with feature highlights
+   Tabbed solutions — global coverage, data availability, tech consulting
    ============================================================= */
-import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, BarChart3, Shield, Globe, Leaf } from "lucide-react";
+import { useState } from "react";
+import { useRevealAll } from "@/hooks/useReveal";
+import { CheckCircle2, Globe, BarChart3, Shield, Database } from "lucide-react";
 
 const DC_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/service_datacenter-kG6JiRAbRutMhqYpkzk6xw.webp";
 const SOLAR_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/service_solar-Uh47VyyxE2Ef3rcXCv7FBp.webp";
@@ -11,97 +12,85 @@ const CONSULTING_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/3105196632738730
 
 const solutions = [
   {
-    id: "energy",
-    tab: "Energy Campus",
-    headline: "Integrated Energy Campus Design",
+    id: "coverage",
+    tab: "Global Coverage",
+    headline: "Worldwide Consulting Reach",
     description:
-      "We design and develop comprehensive energy campuses that co-locate data centers with renewable generation assets. Our approach integrates solar farms, battery storage, and grid connection infrastructure into a single optimized facility — minimizing transmission losses and maximizing uptime.",
-    image: DC_IMAGE,
+      "Infinity Bloom operates across Asia-Pacific, the Middle East, and emerging markets. Our consultants bring local regulatory expertise combined with international best practices — enabling seamless cross-border energy and data infrastructure projects wherever you need them.",
+    image: CONSULTING_IMAGE,
     features: [
-      "Co-located solar + data center master planning",
-      "Grid connection and substation design",
-      "Battery storage sizing and integration",
-      "Energy management system (EMS) deployment",
-      "Carbon accounting and ESG reporting",
+      "Asia-Pacific, Middle East, and global market access",
+      "Cross-border project management and advisory",
+      "Local regulatory and grid compliance expertise",
+      "Multilingual delivery (English, Mandarin, Cantonese)",
+      "Strategic partnerships with leading OEMs and EPCs",
     ],
-    icon: Leaf,
-    color: "#10B981",
+    icon: Globe,
+    color: "#0EA5E9",
   },
   {
-    id: "btm",
-    tab: "BTM Solar & Battery",
-    headline: "Behind-the-Meter Energy Independence",
+    id: "data",
+    tab: "Data Availability",
+    headline: "Always-On Infrastructure Intelligence",
     description:
-      "Our BTM solar and battery solutions help commercial and industrial clients reduce their reliance on the grid, lower peak demand charges, and achieve energy resilience. We handle everything from feasibility study to installation and ongoing O&M.",
-    image: SOLAR_IMAGE,
+      "Our enterprise platforms provide 24/7 real-time data availability for energy and data center operations. From power consumption analytics to predictive maintenance alerts, our systems ensure you have the information you need — when you need it.",
+    image: DC_IMAGE,
     features: [
-      "Rooftop and ground-mount solar PV design",
-      "Battery energy storage system (BESS) integration",
-      "Peak shaving and demand response",
-      "Remote monitoring and performance analytics",
-      "Regulatory compliance and grid approval",
+      "24/7 real-time monitoring and alerting",
+      "Cloud-native architecture with 99.9% platform uptime",
+      "Comprehensive API for third-party integration",
+      "Historical data analytics and trend reporting",
+      "Customizable dashboards and automated reports",
     ],
-    icon: BarChart3,
-    color: "#F59E0B",
+    icon: Database,
+    color: "#06B6D4",
   },
   {
     id: "software",
-    tab: "B2B Software",
-    headline: "Enterprise Energy & DCIM Software",
+    tab: "Enterprise Software",
+    headline: "Purpose-Built DCIM & Energy Platforms",
     description:
-      "Our proprietary software platform gives data center operators and energy managers real-time visibility and control over their infrastructure. From predictive maintenance to automated energy optimization, our tools reduce OpEx and improve sustainability performance.",
-    image: CONSULTING_IMAGE,
+      "Our proprietary software suite is designed for the unique challenges of data center and energy infrastructure management. From capacity planning to carbon accounting, our tools give operators the intelligence they need to make better decisions.",
+    image: DC_IMAGE,
     features: [
       "Real-time power and cooling monitoring",
       "AI-driven energy optimization engine",
       "PUE and WUE tracking dashboards",
       "Capacity planning and scenario modelling",
-      "API integration with existing DCIM/BMS systems",
+      "API integration with existing BMS and DCIM systems",
     ],
     icon: Shield,
-    color: "#0EA5E9",
+    color: "#10B981",
   },
   {
-    id: "global",
-    tab: "Regional Reach",
-    headline: "Hong Kong Hub, Regional Delivery",
+    id: "btm",
+    tab: "BTM Energy",
+    headline: "Behind-the-Meter Solar & Storage",
     description:
-      "Headquartered in Hong Kong, we serve clients across Greater China, Southeast Asia, and beyond. Our team combines deep local regulatory knowledge with international best practices — enabling cross-border energy and data infrastructure projects.",
-    image: CONSULTING_IMAGE,
+      "Our BTM solutions help commercial and industrial clients achieve energy independence. We handle the full lifecycle — from feasibility and design through installation, commissioning, and ongoing performance optimization.",
+    image: SOLAR_IMAGE,
     features: [
-      "Hong Kong regulatory and grid expertise",
-      "Cross-border project management",
-      "Mandarin, Cantonese, and English delivery",
-      "Regional PPA and energy procurement",
-      "Partnerships with leading OEMs and EPCs",
+      "Rooftop and ground-mount solar PV consulting",
+      "Battery energy storage system (BESS) design",
+      "Peak shaving and demand response strategy",
+      "Remote monitoring and performance analytics",
+      "Regulatory compliance and grid approval support",
     ],
-    icon: Globe,
-    color: "#06B6D4",
+    icon: BarChart3,
+    color: "#F59E0B",
   },
 ];
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) entry.target.classList.add("visible"); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
+
 
 export default function SolutionsSection() {
   const [active, setActive] = useState(0);
-  const titleRef = useReveal();
-  const contentRef = useReveal();
+  const sectionRef = useRevealAll();
   const sol = solutions[active];
   const Icon = sol.icon;
 
   return (
-    <section id="solutions" className="py-24 bg-[#0A1628] relative overflow-hidden">
+    <section id="solutions" className="py-24 bg-[#0A1628] relative overflow-hidden" ref={sectionRef}>
       {/* Decorative */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[400px] opacity-5"
         style={{ background: 'radial-gradient(ellipse at bottom right, #06B6D4 0%, transparent 70%)' }}
@@ -109,7 +98,7 @@ export default function SolutionsSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div ref={titleRef} className="reveal text-center mb-12">
+        <div className="reveal text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/10 mb-4">
             <span className="text-xs font-medium text-[#06B6D4] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Our Solutions
@@ -122,7 +111,7 @@ export default function SolutionsSection() {
             Integrated <span className="gradient-text">Platforms</span>
           </h2>
           <p className="text-lg text-white/55 max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            Deep expertise across energy, infrastructure, and software — delivered as integrated solutions.
+            Global consulting expertise paired with enterprise-grade technology platforms.
           </p>
         </div>
 
@@ -154,7 +143,7 @@ export default function SolutionsSection() {
         </div>
 
         {/* Content panel */}
-        <div ref={contentRef} className="reveal grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="reveal grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
           <div className="relative rounded-2xl overflow-hidden h-72 lg:h-96 order-2 lg:order-1">
             <img

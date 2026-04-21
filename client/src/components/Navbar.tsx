@@ -1,9 +1,11 @@
 /* =============================================================
    NAVBAR — Deep Ocean Tech Design
    Sticky, transparent-to-solid on scroll, with mobile drawer
+   New logo, properly spaced nav items, no overlap
    ============================================================= */
 import { useState, useEffect } from "react";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Logo from "./Logo";
 
 const navItems = [
   { label: "Services", href: "#services" },
@@ -41,33 +43,29 @@ export default function Navbar() {
         }`}
       >
         <div className="container">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <a
               href="#"
-              className="flex items-center gap-2.5 group"
+              className="flex items-center gap-2 group flex-shrink-0"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#06B6D4] flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/50 transition-all duration-300">
-                <Zap className="w-4 h-4 text-white fill-white" />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-display font-800 text-white text-base tracking-tight" style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800 }}>
-                  INFINITY BLOOM
-                </span>
-                <span className="text-[10px] text-[#0EA5E9] tracking-[0.15em] uppercase font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                  Co. Limited
-                </span>
-              </div>
+              <Logo size={34} />
+              <span
+                className="font-extrabold text-white text-sm tracking-tight whitespace-nowrap"
+                style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800 }}
+              >
+                INFINITY BLOOM
+              </span>
             </a>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Desktop nav — centered */}
+            <div className="hidden lg:flex items-center gap-6 flex-shrink-0">
               {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item.href)}
-                  className="nav-link text-sm font-medium text-white/70 hover:text-[#0EA5E9] transition-colors duration-300"
+                  className="nav-link text-sm font-medium text-white/70 hover:text-[#0EA5E9] transition-colors duration-300 whitespace-nowrap"
                   style={{ fontFamily: 'DM Sans, sans-serif' }}
                 >
                   {item.label}
@@ -75,11 +73,11 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* CTA — right aligned */}
+            <div className="hidden lg:flex items-center flex-shrink-0">
               <button
                 onClick={() => handleNavClick("#contact")}
-                className="btn-teal px-5 py-2 rounded-lg text-sm font-semibold text-white"
+                className="btn-teal px-5 py-2 rounded-lg text-sm font-semibold text-white whitespace-nowrap"
                 style={{ fontFamily: 'Syne, sans-serif' }}
               >
                 Get in Touch
@@ -88,7 +86,7 @@ export default function Navbar() {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden text-white/80 hover:text-white transition-colors p-1"
+              className="lg:hidden text-white/80 hover:text-white transition-colors p-1"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -100,7 +98,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >

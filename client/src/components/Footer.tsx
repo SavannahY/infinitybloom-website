@@ -1,14 +1,15 @@
 /* =============================================================
    FOOTER — Deep Ocean Tech Design
-   Dense information grid with brand identity
+   Global business emphasis, tech consulting identity
    ============================================================= */
-import { Zap, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import Logo from "./Logo";
 
 const services = [
-  "Renewable Energy Supply",
+  "Renewable Energy Consulting",
   "Data Center Development",
-  "Hardware Consulting",
-  "B2B Software Solutions",
+  "Hardware Advisory",
+  "Enterprise Software",
   "BTM Solar & Battery",
   "Energy Campus Design",
 ];
@@ -35,20 +36,13 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#06B6D4] flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                <Zap className="w-4 h-4 text-white fill-white" />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-extrabold text-white text-sm tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>
-                  INFINITY BLOOM
-                </span>
-                <span className="text-[9px] text-[#0EA5E9] tracking-[0.15em] uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                  Co. Limited
-                </span>
-              </div>
+              <Logo size={28} />
+              <span className="font-extrabold text-white text-sm tracking-tight" style={{ fontFamily: 'Syne, sans-serif' }}>
+                INFINITY BLOOM
+              </span>
             </div>
             <p className="text-sm text-white/45 leading-relaxed mb-5" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-              Blooming Tech Solutions — powering the future of data infrastructure with renewable energy from Hong Kong.
+              A global technology consulting firm — powering the future of data infrastructure with renewable energy.
             </p>
             <div className="space-y-2.5">
               <a

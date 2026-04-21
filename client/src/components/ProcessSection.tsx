@@ -1,63 +1,50 @@
 /* =============================================================
    PROCESS SECTION — Deep Ocean Tech Design
-   How we work — 4-step process with connecting line
+   Consulting-focused 4-step process
    ============================================================= */
-import { useEffect, useRef } from "react";
-import { Search, FileText, Wrench, BarChart2 } from "lucide-react";
+import { useRevealAll } from "@/hooks/useReveal";
+import { Search, PenTool, Rocket, BarChart2 } from "lucide-react";
 
 const steps = [
   {
     number: "01",
     icon: Search,
-    title: "Discovery & Feasibility",
+    title: "Discovery & Assessment",
     description:
-      "We begin with a thorough assessment of your energy needs, site conditions, regulatory environment, and financial objectives. Our team produces a detailed feasibility report with multiple scenario analyses.",
+      "We assess your energy needs, site conditions, regulatory landscape, and business objectives — producing a clear feasibility report with actionable recommendations.",
     color: "#0EA5E9",
   },
   {
     number: "02",
-    icon: FileText,
-    title: "Design & Engineering",
+    icon: PenTool,
+    title: "Strategy & Design",
     description:
-      "Our engineers develop detailed technical designs for your energy or data infrastructure project — from power system schematics and data center layouts to software architecture and integration plans.",
+      "Our consultants develop tailored technical designs and strategic roadmaps — from power system architecture and data center layouts to software integration plans.",
     color: "#06B6D4",
   },
   {
     number: "03",
-    icon: Wrench,
-    title: "Procurement & Delivery",
+    icon: Rocket,
+    title: "Implementation",
     description:
-      "We manage the full procurement and construction process, leveraging our network of pre-qualified suppliers and contractors. Rigorous quality control at every stage ensures on-time, on-budget delivery.",
+      "We manage procurement, construction, and deployment through our global partner network — ensuring quality delivery on time and within budget.",
     color: "#10B981",
   },
   {
     number: "04",
     icon: BarChart2,
-    title: "Operations & Optimisation",
+    title: "Optimisation & Support",
     description:
-      "Post-commissioning, our team provides ongoing monitoring, performance analytics, and optimisation services. Our software platforms give you real-time visibility and control over your infrastructure.",
+      "Post-deployment, our platforms provide real-time monitoring, analytics, and ongoing advisory — keeping your infrastructure performing at its best.",
     color: "#F59E0B",
   },
 ];
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) entry.target.classList.add("visible"); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
 export default function ProcessSection() {
-  const titleRef = useReveal();
+  const sectionRef = useRevealAll();
 
   return (
-    <section className="py-24 bg-[#050E1F] relative overflow-hidden">
+    <section className="py-24 bg-[#050E1F] relative overflow-hidden" ref={sectionRef}>
       {/* Decorative */}
       <div className="absolute inset-0 opacity-3"
         style={{
@@ -67,7 +54,7 @@ export default function ProcessSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div ref={titleRef} className="reveal text-center mb-16">
+        <div className="reveal text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#10B981]/30 bg-[#10B981]/10 mb-4">
             <span className="text-xs font-medium text-[#10B981] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               How We Work
@@ -80,7 +67,7 @@ export default function ProcessSection() {
             Our <span className="gradient-text">Process</span>
           </h2>
           <p className="text-lg text-white/55 max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            A structured, transparent approach from initial discovery through long-term operations.
+            A structured, transparent consulting approach from initial discovery through long-term support.
           </p>
         </div>
 

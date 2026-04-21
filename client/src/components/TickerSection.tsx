@@ -1,21 +1,21 @@
 /* =============================================================
    TICKER SECTION — Deep Ocean Tech Design
-   Scrolling marquee of capabilities between hero and services
+   Scrolling marquee — global business, tech consulting emphasis
    ============================================================= */
 
 const items = [
-  "Renewable Energy Supply",
+  "Technology Consulting",
+  "Renewable Energy",
   "Data Center Development",
-  "Hardware Consulting",
+  "Hardware Advisory",
   "BTM Solar & Battery",
-  "B2B Software",
+  "Enterprise Software",
   "Energy Campus Design",
   "BESS Integration",
   "DCIM Platforms",
-  "PPA Structuring",
-  "Grid Connection",
-  "Hong Kong Based",
-  "Greater China Coverage",
+  "Global Coverage",
+  "24/7 Data Availability",
+  "B2B Solutions",
 ];
 
 export default function TickerSection() {

@@ -1,13 +1,13 @@
 /* =============================================================
    WHY US SECTION — Deep Ocean Tech Design
-   Differentiators with visual comparison and feature highlights
+   Differentiators — tech consulting, global business focus
    ============================================================= */
-import { useEffect, useRef } from "react";
+import { useRevealAll } from "@/hooks/useReveal";
 import {
   Layers,
   Lightbulb,
   Handshake,
-  Clock,
+  Globe,
   ShieldCheck,
   Workflow,
 } from "lucide-react";
@@ -15,66 +15,53 @@ import {
 const differentiators = [
   {
     icon: Layers,
-    title: "Full-Stack Capability",
+    title: "Full-Stack Consulting",
     description:
-      "We are one of the few firms in Asia that can deliver across the entire value chain — from renewable energy procurement and data center construction to hardware advisory and enterprise software. No need to manage multiple vendors.",
+      "One of the few firms globally that can advise across the entire value chain — from renewable energy strategy and data center design to hardware procurement and enterprise software. One partner, end-to-end.",
     color: "#0EA5E9",
   },
   {
     icon: Lightbulb,
     title: "Proprietary Technology",
     description:
-      "Our in-house software platform for energy campus management and DCIM is purpose-built for the Asia-Pacific market, incorporating local grid characteristics and regulatory requirements.",
+      "Our in-house software platforms for energy campus management and DCIM are purpose-built for global markets, incorporating local grid characteristics and regulatory requirements.",
     color: "#06B6D4",
   },
   {
     icon: Handshake,
     title: "Trusted B2B Partner",
     description:
-      "We operate exclusively in the B2B space, serving data center operators, real estate developers, and large enterprises. Our relationships are built on long-term contracts and measurable outcomes.",
+      "We operate exclusively in the B2B space, serving data center operators, real estate developers, and large enterprises. Our relationships are built on measurable outcomes and long-term value.",
     color: "#10B981",
   },
   {
-    icon: Clock,
-    title: "Speed to Delivery",
+    icon: Globe,
+    title: "Global Reach",
     description:
-      "Our streamlined project management methodology and pre-qualified supply chain enable faster delivery timelines than traditional engineering firms — without compromising quality.",
+      "Headquartered in Hong Kong with consulting engagements across Asia-Pacific, the Middle East, and emerging markets. We bring international expertise to every project.",
     color: "#F59E0B",
   },
   {
     icon: ShieldCheck,
     title: "Regulatory Expertise",
     description:
-      "Deep knowledge of Hong Kong's electricity market, grid connection requirements, and cross-border energy regulations in Greater China and Southeast Asia.",
+      "Deep knowledge of electricity markets, grid connection requirements, and cross-border energy regulations across multiple jurisdictions and geographies.",
     color: "#0EA5E9",
   },
   {
     icon: Workflow,
-    title: "Integrated Workflow",
+    title: "Integrated Delivery",
     description:
-      "From initial feasibility and financial modelling through construction, commissioning, and ongoing O&M — our integrated workflow reduces handover risk and ensures accountability.",
+      "From initial feasibility and financial modelling through design, delivery, and ongoing operations — our integrated consulting approach reduces handover risk and ensures accountability.",
     color: "#06B6D4",
   },
 ];
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) entry.target.classList.add("visible"); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
 export default function WhyUsSection() {
-  const titleRef = useReveal();
+  const sectionRef = useRevealAll();
 
   return (
-    <section id="why-us" className="py-24 bg-[#0A1628] relative overflow-hidden">
+    <section id="why-us" className="py-24 bg-[#0A1628] relative overflow-hidden" ref={sectionRef}>
       {/* Decorative */}
       <div className="absolute top-0 right-0 w-[600px] h-[400px] opacity-5"
         style={{ background: 'radial-gradient(ellipse at top right, #0EA5E9 0%, transparent 70%)' }}
@@ -82,7 +69,7 @@ export default function WhyUsSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div ref={titleRef} className="reveal text-center mb-16">
+        <div className="reveal text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#F59E0B]/30 bg-[#F59E0B]/10 mb-4">
             <span className="text-xs font-medium text-[#F59E0B] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Why Infinity Bloom
@@ -95,7 +82,7 @@ export default function WhyUsSection() {
             Our <span className="gradient-text">Advantage</span>
           </h2>
           <p className="text-lg text-white/55 max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            What sets Infinity Bloom apart in the competitive landscape of energy and data infrastructure.
+            What sets Infinity Bloom apart as a global technology consulting firm.
           </p>
         </div>
 
@@ -155,7 +142,7 @@ export default function WhyUsSection() {
                   Ready to Power Your Infrastructure?
                 </h3>
                 <p className="text-white/60" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                  Let's discuss how Infinity Bloom can support your energy and data center goals.
+                  Let's discuss how Infinity Bloom can support your energy and data center goals — anywhere in the world.
                 </p>
               </div>
               <button

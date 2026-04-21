@@ -1,9 +1,9 @@
 /* =============================================================
    ABOUT SECTION — Deep Ocean Tech Design
-   Company story, values, and team highlights
+   New company, global focus, tech consulting emphasis
    ============================================================= */
-import { useEffect, useRef } from "react";
-import { MapPin, Award, Users, TrendingUp } from "lucide-react";
+import { useRevealAll } from "@/hooks/useReveal";
+import { Globe, Award, Users, TrendingUp } from "lucide-react";
 
 const CONSULTING_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/service_consulting-4T4pgK43QVkc2hyj9fNBTh.webp";
 
@@ -11,49 +11,34 @@ const values = [
   {
     icon: Award,
     title: "Technical Excellence",
-    description: "Our team brings decades of combined experience in power engineering, data center design, and enterprise software development.",
+    description: "Deep expertise in power engineering, data center design, and enterprise software — built from decades of combined industry experience.",
     color: "#0EA5E9",
   },
   {
     icon: TrendingUp,
-    title: "Sustainable Growth",
-    description: "We believe that the most resilient businesses are built on clean energy foundations. Every project we deliver advances the energy transition.",
+    title: "Sustainable Innovation",
+    description: "We believe the most resilient infrastructure is built on clean energy. Every engagement we deliver advances the energy transition.",
     color: "#10B981",
   },
   {
     icon: Users,
-    title: "Partnership Approach",
-    description: "We work as an extension of your team — from initial feasibility through long-term operations. Our success is measured by yours.",
+    title: "Consulting Partnership",
+    description: "We work as an extension of your team — providing strategic advisory, technical delivery, and long-term operational support.",
     color: "#06B6D4",
   },
   {
-    icon: MapPin,
-    title: "Hong Kong Rooted",
-    description: "Incorporated in Hong Kong with deep regional networks, we navigate local regulations and cross-border complexities with confidence.",
+    icon: Globe,
+    title: "Global Perspective",
+    description: "Headquartered in Hong Kong with a global outlook. We bring international best practices to every market we serve.",
     color: "#F59E0B",
   },
 ];
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) entry.target.classList.add("visible"); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
 export default function AboutSection() {
-  const titleRef = useReveal();
-  const leftRef = useReveal();
-  const rightRef = useReveal();
+  const sectionRef = useRevealAll();
 
   return (
-    <section id="about" className="py-24 bg-[#050E1F] relative overflow-hidden">
+    <section id="about" className="py-24 bg-[#050E1F] relative overflow-hidden" ref={sectionRef}>
       {/* Decorative glow */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] opacity-5"
         style={{ background: 'radial-gradient(ellipse at left, #10B981 0%, transparent 70%)' }}
@@ -61,7 +46,7 @@ export default function AboutSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div ref={titleRef} className="reveal text-center mb-16">
+        <div className="reveal text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#10B981]/30 bg-[#10B981]/10 mb-4">
             <span className="text-xs font-medium text-[#10B981] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               About Us
@@ -78,11 +63,11 @@ export default function AboutSection() {
         {/* Main content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           {/* Left: Image */}
-          <div ref={leftRef} className="reveal relative">
+          <div className="reveal relative">
             <div className="relative rounded-2xl overflow-hidden h-80 lg:h-[420px]">
               <img
                 src={CONSULTING_IMAGE}
-                alt="Infinity Bloom team in Hong Kong"
+                alt="Infinity Bloom global consulting team"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050E1F]/80 via-transparent to-transparent" />
@@ -91,42 +76,42 @@ export default function AboutSection() {
             <div className="absolute -bottom-4 -right-4 bg-[#0A1628] border border-[#0EA5E9]/30 rounded-2xl p-4 shadow-xl">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#06B6D4] flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-white" />
+                  <Globe className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/50" style={{ fontFamily: 'DM Sans, sans-serif' }}>Headquartered in</p>
-                  <p className="text-sm font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>Hong Kong SAR</p>
+                  <p className="text-xs text-white/50" style={{ fontFamily: 'DM Sans, sans-serif' }}>Serving Clients</p>
+                  <p className="text-sm font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>Globally</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right: Text */}
-          <div ref={rightRef} className="reveal">
+          <div className="reveal">
             <h3
               className="text-2xl md:text-3xl font-bold text-white mb-5 leading-tight"
               style={{ fontFamily: 'Syne, sans-serif' }}
             >
-              Bridging Renewable Energy and Digital Infrastructure
+              A Technology Consulting Firm for the Energy Transition
             </h3>
             <div className="space-y-4 text-white/60 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               <p>
-                Infinity Bloom Co. Limited is a Hong Kong-based technology and energy company founded to address the growing intersection of digital infrastructure and sustainable energy. As data centers become the backbone of the modern economy, their energy demands have never been greater — or more consequential.
+                Infinity Bloom Co. Limited is a technology consulting firm founded to address the growing intersection of digital infrastructure and sustainable energy. As data centers become the backbone of the global economy, their energy demands have never been greater — or more consequential.
               </p>
               <p>
-                We work with data center operators, property developers, and enterprises to design and deliver solutions that are both technically rigorous and environmentally responsible. Our team combines expertise in power engineering, IT infrastructure, and enterprise software to provide end-to-end value.
+                We work with data center operators, property developers, and enterprises worldwide to design and deliver solutions that are both technically rigorous and environmentally responsible. Our team combines expertise in power engineering, IT infrastructure, and enterprise software to provide end-to-end consulting value.
               </p>
               <p>
-                From procuring renewable electricity contracts to deploying behind-the-meter solar and battery systems, from hardware advisory to proprietary energy management software — Infinity Bloom is your partner across the full infrastructure lifecycle.
+                From renewable energy advisory and data center development to hardware consulting and proprietary software platforms — Infinity Bloom is your partner for the full infrastructure lifecycle, wherever your business operates.
               </p>
             </div>
 
             {/* Key facts */}
             <div className="grid grid-cols-2 gap-4 mt-8">
               {[
-                { label: "Founded", value: "Hong Kong" },
-                { label: "Focus", value: "B2B Enterprise" },
-                { label: "Coverage", value: "Greater China & SEA" },
+                { label: "Headquarters", value: "Hong Kong" },
+                { label: "Focus", value: "B2B Consulting" },
+                { label: "Coverage", value: "Global" },
                 { label: "Languages", value: "EN / 中文 / 廣東話" },
               ].map((fact) => (
                 <div key={fact.label} className="glow-card rounded-xl p-4">

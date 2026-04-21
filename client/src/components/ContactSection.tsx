@@ -2,26 +2,12 @@
    CONTACT SECTION — Deep Ocean Tech Design
    Contact form + company info panel
    ============================================================= */
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useRevealAll } from "@/hooks/useReveal";
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) entry.target.classList.add("visible"); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
 export default function ContactSection() {
-  const titleRef = useReveal();
-  const leftRef = useReveal();
-  const rightRef = useReveal();
+  const sectionRef = useRevealAll();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,7 +35,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#050E1F] relative overflow-hidden">
+    <section id="contact" className="py-24 bg-[#050E1F] relative overflow-hidden" ref={sectionRef}>
       {/* Decorative */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] opacity-5"
         style={{ background: 'radial-gradient(ellipse at bottom, #0EA5E9 0%, transparent 70%)' }}
@@ -57,7 +43,7 @@ export default function ContactSection() {
 
       <div className="container relative z-10">
         {/* Header */}
-        <div ref={titleRef} className="reveal text-center mb-16">
+        <div className="reveal text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#0EA5E9]/30 bg-[#0EA5E9]/10 mb-4">
             <span className="text-xs font-medium text-[#0EA5E9] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Get in Touch
@@ -70,13 +56,13 @@ export default function ContactSection() {
             Contact <span className="gradient-text">Us</span>
           </h2>
           <p className="text-lg text-white/55 max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            Whether you're exploring a new project or looking for a long-term partner, we'd love to hear from you.
+            Whether you're exploring a new project or looking for a global consulting partner, we'd love to hear from you.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Left: Company info */}
-          <div ref={leftRef} className="reveal lg:col-span-2 space-y-6">
+          <div className="reveal lg:col-span-2 space-y-6">
             {/* Info card */}
             <div className="glow-card rounded-2xl p-6">
               <h3
@@ -141,9 +127,10 @@ export default function ContactSection() {
               <div className="space-y-2">
                 {[
                   "Hong Kong SAR",
-                  "Mainland China",
+                  "Greater China",
                   "Southeast Asia",
-                  "Regional APAC",
+                  "Middle East",
+                  "Global Markets",
                 ].map((area) => (
                   <div key={area} className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
@@ -181,7 +168,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right: Contact form */}
-          <div ref={rightRef} className="reveal lg:col-span-3">
+          <div className="reveal lg:col-span-3">
             <div className="glow-card rounded-2xl p-6 md:p-8">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">

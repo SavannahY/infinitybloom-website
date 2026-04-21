@@ -1,6 +1,9 @@
 /* =============================================================
    HERO SECTION — Deep Ocean Tech Design
-   Full-bleed dark hero with split layout, animated stats
+   - Fixed heading proportions (not squished)
+   - Removed HK tag
+   - Stats replaced with coverage & data availability
+   - Emphasizes tech consulting & global business
    ============================================================= */
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -8,14 +11,12 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663273873036/bcuuWxzMvVHtBtirGkw3hg/hero_main-bQub99AcDwxWmFPWy9dYqH.webp";
 
 interface StatProps {
-  value: number;
-  suffix: string;
+  value: string;
   label: string;
   delay?: number;
 }
 
-function AnimatedStat({ value, suffix, label, delay = 0 }: StatProps) {
-  const [count, setCount] = useState(0);
+function AnimatedStat({ value, label, delay = 0 }: StatProps) {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,38 +29,23 @@ function AnimatedStat({ value, suffix, label, delay = 0 }: StatProps) {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!visible) return;
-    const timer = setTimeout(() => {
-      const duration = 1800;
-      const steps = 60;
-      const increment = value / steps;
-      let current = 0;
-      const interval = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setCount(value);
-          clearInterval(interval);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
-      return () => clearInterval(interval);
-    }, delay);
-    return () => clearTimeout(timer);
-  }, [visible, value, delay]);
-
   return (
-    <div ref={ref} className="text-center">
-      <div className="flex items-baseline justify-center gap-1">
-        <span className="text-3xl md:text-4xl font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>
-          {count}
-        </span>
-        <span className="text-xl md:text-2xl font-bold text-[#0EA5E9]" style={{ fontFamily: 'Syne, sans-serif' }}>
-          {suffix}
-        </span>
-      </div>
-      <p className="text-sm text-white/50 mt-1 tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+    <div
+      ref={ref}
+      className="text-center transition-all duration-700"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(12px)',
+        transitionDelay: `${delay}ms`,
+      }}
+    >
+      <span
+        className="text-2xl md:text-3xl font-bold text-white block"
+        style={{ fontFamily: 'Syne, sans-serif' }}
+      >
+        {value}
+      </span>
+      <p className="text-xs md:text-sm text-white/45 mt-1.5 tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif' }}>
         {label}
       </p>
     </div>
@@ -78,16 +64,16 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <img
           src={HERO_IMAGE}
-          alt="Infinity Bloom data center campus with renewable energy"
+          alt="Infinity Bloom — global technology consulting"
           className="w-full h-full object-cover object-center"
         />
-        {/* Multi-layer overlay for text readability */}
+        {/* Multi-layer overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#050E1F]/95 via-[#050E1F]/75 to-[#050E1F]/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050E1F] via-transparent to-[#050E1F]/30" />
       </div>
 
-      {/* Decorative grid lines */}
-      <div className="absolute inset-0 opacity-5"
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(rgba(14,165,233,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(14,165,233,0.5) 1px, transparent 1px)`,
           backgroundSize: '80px 80px'
@@ -95,39 +81,31 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center pt-24 pb-16">
+      <div className="relative z-10 flex-1 flex flex-col justify-center pt-28 pb-20">
         <div className="container">
           <div className="max-w-3xl">
-            {/* Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#0EA5E9]/30 bg-[#0EA5E9]/10 mb-6 animate-fade-up" style={{ animationDelay: '0ms' }}>
-              <div className="w-1.5 h-1.5 rounded-full bg-[#0EA5E9] animate-pulse" />
-              <span className="text-xs font-medium text-[#0EA5E9] tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                Hong Kong · Renewable Energy & Data Infrastructure
-              </span>
-            </div>
-
-            {/* Headline */}
+            {/* Headline — proper proportions, not squished */}
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6 animate-fade-up"
-              style={{ fontFamily: 'Syne, sans-serif', animationDelay: '100ms' }}
+              className="text-[3.5rem] sm:text-[4.5rem] lg:text-[6rem] font-extrabold text-white mb-8 animate-fade-up tracking-[-0.02em]"
+              style={{ fontFamily: 'Syne, sans-serif', animationDelay: '0ms', lineHeight: '1.15' }}
             >
-              Blooming{" "}
-              <span className="gradient-text">Tech</span>
-              <br />
+              Blooming<br />
+              <span className="gradient-text">Tech</span>{" "}
               Solutions
             </h1>
 
-            {/* Subheadline */}
+            {/* Subheadline — tech consulting & global positioning */}
             <p
-              className="text-lg md:text-xl text-white/65 leading-relaxed mb-8 max-w-xl animate-fade-up"
-              style={{ fontFamily: 'DM Sans, sans-serif', animationDelay: '200ms' }}
+              className="text-lg md:text-xl text-white/60 leading-relaxed mb-8 max-w-2xl animate-fade-up"
+              style={{ fontFamily: 'DM Sans, sans-serif', animationDelay: '150ms' }}
             >
-              Powering the next generation of data centers with renewable electricity, 
-              intelligent hardware, and enterprise software — from Hong Kong to the world.
+              A global technology consulting firm specializing in renewable energy infrastructure, 
+              data center development, and enterprise software — delivering integrated solutions 
+              across Asia-Pacific and beyond.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 animate-fade-up" style={{ animationDelay: '300ms' }}>
+            <div className="flex flex-col sm:flex-row gap-3 animate-fade-up" style={{ animationDelay: '250ms' }}>
               <button
                 onClick={() => handleScroll("#services")}
                 className="btn-teal inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-white"
@@ -148,14 +126,14 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Stats bar */}
+      {/* Stats bar — coverage & data availability focus */}
       <div className="relative z-10 border-t border-white/10 bg-[#050E1F]/80 backdrop-blur-md">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8">
-            <AnimatedStat value={50} suffix="+" label="MW Renewable Capacity" delay={0} />
-            <AnimatedStat value={30} suffix="+" label="Data Center Projects" delay={150} />
-            <AnimatedStat value={200} suffix="+" label="Hardware Clients" delay={300} />
-            <AnimatedStat value={99} suffix=".9%" label="Uptime SLA" delay={450} />
+            <AnimatedStat value="Global" label="Business Coverage" delay={0} />
+            <AnimatedStat value="24/7" label="Data Availability" delay={150} />
+            <AnimatedStat value="APAC" label="Regional Expertise" delay={300} />
+            <AnimatedStat value="End-to-End" label="Consulting Delivery" delay={450} />
           </div>
         </div>
       </div>
@@ -163,7 +141,7 @@ export default function HeroSection() {
       {/* Scroll indicator */}
       <button
         onClick={() => handleScroll("#services")}
-        className="absolute bottom-28 md:bottom-36 right-8 md:right-12 z-10 flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors duration-300 group"
+        className="absolute bottom-32 md:bottom-40 right-8 md:right-12 z-10 flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors duration-300"
         aria-label="Scroll down"
       >
         <span className="text-xs tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif', writingMode: 'vertical-rl' }}>
